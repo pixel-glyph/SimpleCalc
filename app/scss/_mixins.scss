@@ -1,0 +1,22 @@
+@mixin transition($prop, $duration) {
+  -webkit-transition: $prop $duration;
+     -moz-transition: $prop $duration;
+       -o-transition: $prop $duration;
+          transition: $prop $duration;
+}
+
+/*-----------------------
+    MEDIA QUERIES
+------------------------*/
+
+@mixin bp($point) {
+  @if $point == 450 {
+    @media (min-width: 450px) { @content; }
+  }
+  @else if $point == 801 {
+    @media (min-width: 801px) { @content; }
+  }
+  @else if $point == 1280 {
+    @media (min-width: 1280px) { @content; }
+  }
+}
