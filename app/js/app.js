@@ -7,59 +7,77 @@
 			nums = document.getElementsByClassName('num'),
 			ops = document.getElementsByClassName('op'),
 			numsInputted = [],
-			val, val1, val2, currentOp;
+			val1 = '',
+			val2 = '',
+			val, currentOp, result;
 
-	function numClick() {
+
+	function storeNum() {
 		// display input in form field and store individual nums
 		// into an array
 		form.insertAdjacentHTML('beforeend', this.innerHTML);
 		numsInputted.push(this.innerHTML);
 	}
 
-	function opClick() {
+
+	function operation() {
 
 		// check if last click was an operation and not a number
 		if(! /[+\-*\/^]$/.test(form.innerHTML)) {
 
 			if(numsInputted.length) {
 
-				val = parseFloat(numsInputted.join(''));
+				val = numsInputted.join('');
+				numsInputted = [];
 				form.insertAdjacentHTML('beforeend', this.innerHTML);
 
-				if(val1 !== "") {
-
+				if(val1 !== '') {
 					val2 = val;
-					compute(val1, val2);
+					compute();
 
 				} else {
 					val1 = val;
 				}
+
 			} else {
 				val1 = 0;
+				form.insertAdjacentHTML('beforeend', '0' + this.innerHTML);
 			}
-
-			currentOp = this.innerHTML;
 
 		} else {
 			// update last char in formula field and currentOp
 			form.innerHTML = form.innerHTML.slice(0, -1) + this.innerHTML;
-			currentOp = this.innerHTML;
 		}
+
+		currentOp = this.innerHTML;
 	}
 
-	function compute(val1, val2) {
-		console.log("processing...");
+
+	function compute() {
+		ans.innerHTML = eval(val1 + currentOp + val2);
+		val1 = ans.innerHTML;
+	}
+
+	function clear() {
+		ans.innerHTML = '0';
+		form.innerHTML = '';
+		val1 = '';
+		val2 = '';
+		val = '';
 	}
 
 	// add handlers to numbered inputs
 	for(var i=0; i<nums.length; i++) {
-		nums[i].addEventListener('click', numClick);
+		nums[i].addEventListener('click', storeNum);
 	}
 
 	// add handlers to operation inputs
 	for (var i=0; i<ops.length; i++) {
-		ops[i].addEventListener('click', opClick);
+		ops[i].addEventListener('click', operation);
 	}
+
+	document.getElementById('clear').addEventListener('click', clear);
+
 
 
 //})();
