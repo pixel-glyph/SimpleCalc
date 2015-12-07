@@ -9,7 +9,7 @@
 			numsInputted = [],
 			val1 = '',
 			val2 = '',
-			val, currentOp, result;
+			val, currentOp;
 
 
 	function storeNum() {
@@ -62,7 +62,10 @@
 
 
 	function compute() {
-		ans.innerHTML = eval(val1 + currentOp + val2);
+		currentOp === "^" ?
+				ans.innerHTML = Math.pow(val1, val2) :
+				ans.innerHTML = eval(val1 + currentOp + val2);
+
 		val1 = ans.innerHTML;
 	}
 
@@ -83,16 +86,29 @@
 		ops[i].addEventListener('click', operation);
 	}
 
-	document.getElementById('clear').addEventListener('click', function(){
+	document.getElementById('clear').addEventListener('click', function() {
 		ans.innerHTML = '0';
 		clear();
 	});
 
-	document.getElementById('equals').addEventListener('click', function(){
+	document.getElementById('equals').addEventListener('click', function() {
 		//assign val2 to
 		val2 = numsInputted.join('');
 		compute();
 		clear();
+	});
+
+	document.getElementById('delete').addEventListener('click', function() {
+		if(numsInputted.length) {
+			numsInputted.pop();
+			form.innerHTML = form.innerHTML.slice(0, -1);
+		}
+	});
+
+	document.getElementById('decimal').addEventListener('click', function() {
+		if(numsInputted.indexOf('.') === -1) {
+			storeNum.apply(this);
+		}
 	});
 
 //})();
