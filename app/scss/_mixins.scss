@@ -13,6 +13,9 @@
   @if $point == 450 {
     @media (min-width: 450px) { @content; }
   }
+  @else if $point == 575 {
+    @media (min-width: 575px) { @content; }
+  }
   @else if $point == 801 {
     @media (min-width: 801px) { @content; }
   }
