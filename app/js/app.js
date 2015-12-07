@@ -43,13 +43,21 @@
 				val1 = 0;
 				form.insertAdjacentHTML('beforeend', '0' + this.innerHTML);
 			}
+			currentOp = this.innerHTML;
+
+			// if minus is clicked after *, /, or ^
+		} else if(this.innerHTML === "-" && /[*\/^]$/.test(form.innerHTML)) {
+
+			// add it to display, push to nums array, and keep currentOp as is
+			form.insertAdjacentHTML('beforeend', this.innerHTML);
+			numsInputted.push(this.innerHTML);
 
 		} else {
 			// update last char in formula field and currentOp
 			form.innerHTML = form.innerHTML.slice(0, -1) + this.innerHTML;
+			currentOp = this.innerHTML;
 		}
 
-		currentOp = this.innerHTML;
 	}
 
 
@@ -59,11 +67,10 @@
 	}
 
 	function clear() {
-		ans.innerHTML = '0';
 		form.innerHTML = '';
+		numsInputted = [];
 		val1 = '';
 		val2 = '';
-		val = '';
 	}
 
 	// add handlers to numbered inputs
@@ -76,9 +83,17 @@
 		ops[i].addEventListener('click', operation);
 	}
 
-	document.getElementById('clear').addEventListener('click', clear);
+	document.getElementById('clear').addEventListener('click', function(){
+		ans.innerHTML = '0';
+		clear();
+	});
 
-
+	document.getElementById('equals').addEventListener('click', function(){
+		//assign val2 to
+		val2 = numsInputted.join('');
+		compute();
+		clear();
+	});
 
 //})();
 
