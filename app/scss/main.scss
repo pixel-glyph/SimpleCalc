@@ -11,76 +11,94 @@ body {
 
 #answer {
 	width: 100%;
-	height: 60px;
+	height: 50px;
 	background-color: #CCCDE6;
 
+	@include bp(450) {
+		height: 60px;
+	}
+
 	@include bp(575) {
-		height: 75px;
+		height: 65px;
 	}
 
 	@include bp(801) {
-		height: 105px;
+		height: 92px;
 	}
 
 	@include bp(1280) {
-		height: 145px;
+		height: 120px;
 	}
 
 	p {
 		margin: 5px 8px 0 0;
 		height: 80%;
-		font-size: 3.6em;
+		font-size: 3em;
 		float: right;
+
+		@include bp(450) {
+			font-size: 3.6em;
+		}
 
 		@include bp(575) {
 			margin-top: 3px;
-			font-size: 5.3em;
+			font-size: 4.5em;
 		}
 
 		@include bp(801) {
-			font-size: 7.5em;
+			font-size: 6.4em;
 		}
 
 		@include bp(1280) {
-			margin-top: -10px;
-			font-size: 12em;
+			margin-top: -8px;
+			font-size: 10.2em;
 		}
 	}
 }
 
 #formula {
 	width: 100%;
-	height: 42px;
+	height: 32px;
 	background-color: #A7A9C3;
 
+	@include bp(450) {
+		height: 42px;
+	}
+
 	@include bp(575) {
-		height: 50px;
+		height: 44px;
 	}
 
 	@include bp(801) {
-		height: 65px;
+		height: 55px;
 	}
 
 	@include bp(1280) {
-		height: 85px;
+		height: 70px;
 	}
 
 	p {
 		margin: -1px 10px 0 0;
 		height: 90%;
-		font-size: 3em;
+		font-size: 2.5em;
 		float: right;
 
+		@include bp(450) {
+			font-size: 3em;
+		}
+
 		@include bp(575) {
-			font-size: 4em;
+			margin-top: 1px;
+			font-size: 3.2em;
 		}
 
 		@include bp(801) {
-			font-size: 5em;
+			font-size: 4.2em;
 		}
 
 		@include bp(1280) {
-			font-size: 6.8em;
+			margin-top: -7px;
+			font-size: 6.5em;
 		}
 	}
 }
