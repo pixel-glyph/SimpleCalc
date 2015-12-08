@@ -1,6 +1,5 @@
 
-
-(function(){
+//(function(){
 
 	var ans = document.getElementById('answer-output'),
 			form = document.getElementById('formula-output'),
@@ -13,10 +12,16 @@
 
 
 	function storeNum() {
-		// display input in form field and store individual nums
+		// check if last click was equals button. If so, clear out
+		// all values before storing current number click
+		if(ans.innerHTML === val1 && currentOp === '') {
+			fullClear();
+		}
+		// display input in equation field and store individual nums
 		// into an array
 		form.insertAdjacentHTML('beforeend', this.innerHTML);
 		numsInputted.push(this.innerHTML);
+
 	}
 
 
@@ -34,15 +39,21 @@
 				if(val1 !== '') {
 					val2 = val;
 					compute();
-
 				} else {
 					val1 = val;
 				}
 
+			} else if(ans.innerHTML === val1) {
+				// when an op is clicked after equals
+				form.insertAdjacentHTML('beforeend', val1 + this.innerHTML);
+
 			} else {
+				// when no numbers are entered, 0 will be used as first val
 				val1 = 0;
 				form.insertAdjacentHTML('beforeend', '0' + this.innerHTML);
+
 			}
+
 			currentOp = this.innerHTML;
 
 			// if minus is clicked after *, /, or ^
@@ -62,17 +73,23 @@
 
 
 	function compute() {
-		currentOp === "^" ?
+		currentOp === '^' ?
 				ans.innerHTML = Math.pow(val1, val2) :
 				ans.innerHTML = eval(val1 + currentOp + val2);
 
 		val1 = ans.innerHTML;
 	}
 
-	function clear() {
+	function fullClear() {
+		semiClear();
+		ans.innerHTML = '0';
+		val1 = '';
+	}
+
+	function semiClear() {
 		form.innerHTML = '';
 		numsInputted = [];
-		val1 = '';
+		currentOp = '';
 		val2 = '';
 	}
 
@@ -87,15 +104,13 @@
 	}
 
 	document.getElementById('clear').addEventListener('click', function() {
-		ans.innerHTML = '0';
-		clear();
+		fullClear();
 	});
 
 	document.getElementById('equals').addEventListener('click', function() {
-		//assign val2 to
 		val2 = numsInputted.join('');
 		compute();
-		clear();
+		semiClear();
 	});
 
 	document.getElementById('delete').addEventListener('click', function() {
@@ -111,5 +126,5 @@
 		}
 	});
 
-})();
+//})();
 
