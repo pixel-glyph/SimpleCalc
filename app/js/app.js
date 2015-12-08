@@ -1,6 +1,6 @@
 
 
-//(function(){
+(function(){
 
 	var ans = document.getElementById('answer-output'),
 			form = document.getElementById('formula-output'),
@@ -52,10 +52,10 @@
 			form.insertAdjacentHTML('beforeend', this.innerHTML);
 			numsInputted.push(this.innerHTML);
 
-		} else {
+		} else if(! /[+\-*\/^][\-]$/.test(form.innerHTML)) {
 			// update last char in formula field and currentOp
-			form.innerHTML = form.innerHTML.slice(0, -1) + this.innerHTML;
-			currentOp = this.innerHTML;
+				form.innerHTML = form.innerHTML.slice(0, -1) + this.innerHTML;
+				currentOp = this.innerHTML;
 		}
 
 	}
@@ -111,5 +111,5 @@
 		}
 	});
 
-//})();
+})();
 
