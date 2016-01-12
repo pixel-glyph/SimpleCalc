@@ -81,7 +81,7 @@
 			// finally check if last two chars in equation field are any op
 			// followed by a minus (as a negator to a future num input)
 			// if this is not the case, overwrite previous op with current op
-			// the prevents overwriting a minus acting as a negator with the
+			// this prevents overwriting a minus acting as a negator with the
 			// current op
 		} else if( !/[+\-*\/^][\-]$/.test(form.innerHTML) ) {
 
